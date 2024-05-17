@@ -17,9 +17,9 @@ driver = webdriver.Chrome(service=service) #, options=chrome_options)
 
 
 # your data
-your_first_name = "Gamal"
-your_last_name = "DoeLy"
-your_username = "gamadoe1445pro" # gama1445pro@gmail.com // make sure to be unique
+your_first_name = "Gamal88"
+your_last_name = "DoeLy99"
+your_username = "gamadoe1445777pro" # gama1445pro@gmail.com // make sure to be unique
 your_birthday = "02 3 1999" #dd m yyyy exp : 24 11 2003
 your_gender = "1" # 1:F 2:M 3:Not say 4:Custom
 your_password = "x,nscldsj123...FDKZ"
@@ -61,8 +61,11 @@ try:
     next_button = driver.find_element(By.CLASS_NAME, "VfPpkd-LgbsSe")
     next_button.click()
 
-    create_own_option = wait.until(EC.element_to_be_clickable((By.ID, "selectionc2")))
+    create_own_option = wait.until(EC.element_to_be_clickable((By.ID, "selectionc4")))
     create_own_option.click()
+
+    next_button = driver.find_element(By.CLASS_NAME, "VfPpkd-LgbsSe")
+    next_button.click()
 
     create_own_email = wait.until(EC.element_to_be_clickable((By.NAME, "Username")))
     username_field = driver.find_element(By.NAME, "Username")
