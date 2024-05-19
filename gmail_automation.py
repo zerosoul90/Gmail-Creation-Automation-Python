@@ -2,12 +2,14 @@
 # Original script by Abdelhakim Khaouiti (khaouitiabdelhakim on GitHub)
 
 from selenium import webdriver
+from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
+from faker import Faker
 
 #chrome_options = ChromeOptions()
 #chrome_options.add_argument("--disable-infobars")  # Optional: Disable info bars
@@ -17,9 +19,10 @@ driver = webdriver.Chrome(service=service) #, options=chrome_options)
 
 
 # your data
-your_first_name = "Gamal88"
-your_last_name = "DoeLy99"
-your_username = "gamadoe1445777pro" # gama1445pro@gmail.com // make sure to be unique
+fake = Faker()
+your_first_name = fake.first_name()
+your_last_name = fake.last_name()
+your_username = fake.user_name()+fake.day_of_month()+fake.month()+fake.year() # gama1445pro@gmail.com // make sure to be unique
 your_birthday = "02 3 1999" #dd m yyyy exp : 24 11 2003
 your_gender = "1" # 1:F 2:M 3:Not say 4:Custom
 your_password = "x,nscldsj123...FDKZ"
@@ -61,19 +64,33 @@ try:
     next_button = driver.find_element(By.CLASS_NAME, "VfPpkd-LgbsSe")
     next_button.click()
 
-    create_own_option = wait.until(EC.element_to_be_clickable((By.ID, "selectionc4")))
-    create_own_option.click()
+    try:
+        driver.find_element(By.ID, "selectionc2")
+        create_own_option = wait.until(EC.element_to_be_clickable((By.ID, "selectionc2")))
+        create_own_option.click()
 
-    next_button = driver.find_element(By.CLASS_NAME, "VfPpkd-LgbsSe")
-    next_button.click()
+        next_button = driver.find_element(By.CLASS_NAME, "VfPpkd-LgbsSe")
+        next_button.click()
+    except NoSuchElementException:
+        print("Not find the element selectionc2")
+        create_own_email = wait.until(EC.element_to_be_clickable((By.NAME, "Username")))
+        username_field = driver.find_element(By.NAME, "Username")
+        username_field.clear()
+        username_field.send_keys(your_username)
 
-    create_own_email = wait.until(EC.element_to_be_clickable((By.NAME, "Username")))
-    username_field = driver.find_element(By.NAME, "Username")
-    username_field.clear()
-    username_field.send_keys(your_username)
+        next_button = driver.find_element(By.CLASS_NAME, "VfPpkd-LgbsSe")
+        next_button.click()
+        try :
+            driver.find_element(By.ID, "currentColor")
+            click_button = driver.find_element(By.CLASS_NAME,"xqKM5b")
+            click_button.click()
+            next_button = driver.find_element(By.CLASS_NAME, "VfPpkd-LgbsSe")
+            next_button.click()
+        except NoSuchElementException:
+            print("Not find the element currentColor")
+        pass
 
-    next_button = driver.find_element(By.CLASS_NAME, "VfPpkd-LgbsSe")
-    next_button.click()
+
 
     password_field = wait.until(EC.visibility_of_element_located((By.NAME, "Passwd")))
     password_field.clear()
