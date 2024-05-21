@@ -14,7 +14,7 @@ from faker import Faker
 #chrome_options = ChromeOptions()
 #chrome_options.add_argument("--disable-infobars")  # Optional: Disable info bars
 
-service = ChromeService('chromedriver.exe')
+service = ChromeService('../../chromedriver.exe')
 driver = webdriver.Chrome(service=service) #, options=chrome_options)
 
 
